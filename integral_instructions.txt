@@ -1,0 +1,93 @@
+RV64I指令集：
+1. op: 0000011(3), funct3: 011, funct7: -, 类型: I, 指令: ld rd, imm(rs1), 描述: load double word, 操作: rd = [Address]₆₃:₀
+2. op: 0000011(3), funct3: 110, funct7: -, 类型: I, 指令: lwu rd, imm(rs1), 描述: load word unsigned, 操作: rd = ZeroExt([Address]₃₁:₀)
+3. op: 0011011(27), funct3: 000, funct7: -, 类型: I, 指令: addiw rd, rs1, imm, 描述: add immediate word, 操作: rd = SignExt((rs1 + SignExt(imm))₃₁:₀)
+4. op: 0011011(27), funct3: 001, funct7: 0000000, 类型: I, 指令: slliw rd, rs1, uimm, 描述: shift left logical immediate word, 操作: rd = SignExt((rs1₃₁:₀ << uimm)₃₁:₀)
+5. op: 0011011(27), funct3: 101, funct7: 0000000, 类型: I, 指令: srliw rd, rs1, uimm, 描述: shift right logical immediate word, 操作: rd = SignExt((rs1₃₁:₀ >> uimm)₃₁:₀)
+6. op: 0011011(27), funct3: 101, funct7: 0100000, 类型: I, 指令: sraiw rd, rs1, uimm, 描述: shift right arith. immediate word, 操作: rd = SignExt((rs1₃₁:₀ >>> uimm)₃₁:₀)
+7. op: 0100011(35), funct3: 011, funct7: -, 类型: S, 指令: sd rs2, imm(rs1), 描述: store double word, 操作: [Address]₆₃:₀ = rs2
+8. op: 0111011(59), funct3: 000, funct7: 0000000, 类型: R, 指令: addw rd, rs1, rs2, 描述: add word, 操作: rd = SignExt((rs1 + rs2)₃₁:₀)
+9. op: 0111011(59), funct3: 000, funct7: 0100000, 类型: R, 指令: subw rd, rs1, rs2, 描述: subtract word, 操作: rd = SignExt((rs1 - rs2)₃₁:₀)
+10. op: 0111011(59), funct3: 001, funct7: 0000000, 类型: R, 指令: sllw rd, rs1, rs2, 描述: shift left logical word, 操作: rd = SignExt((rs1₃₁:₀ << rs2₄:₀)₃₁:₀)
+11. op: 0111011(59), funct3: 101, funct7: 0000000, 类型: R, 指令: srlw rd, rs1, rs2, 描述: shift right logical word, 操作: rd = SignExt((rs1₃₁:₀ >> rs2₄:₀)₃₁:₀)
+12. op: 0111011(59), funct3: 101, funct7: 0100000, 类型: R, 指令: sraw rd, rs1, rs2, 描述: shift right arithmetic word, 操作: rd = SignExt((rs1₃₁:₀ >>> rs2₄:₀)₃₁:₀)
+ 
+ 
+ 
+以下为RV32I指令集： 
+13. op: 0000011(3), funct3: 000, funct7: -, 类型: I, 指令: lb rd, imm(rs1), 描述: load byte, 操作: rd = SignExt([Address]₇:₀)
+14. op: 0000011(3), funct3: 001, funct7: -, 类型: I, 指令: lh rd, imm(rs1), 描述: load half, 操作: rd = SignExt([Address]₁₅:₀)
+15. op: 0000011(3), funct3: 010, funct7: -, 类型: I, 指令: lw rd, imm(rs1), 描述: load word, 操作: rd = [Address]₃₁:₀
+16. op: 0000011(3), funct3: 100, funct7: -, 类型: I, 指令: lbu rd, imm(rs1), 描述: load byte unsigned, 操作: rd = ZeroExt([Address]₇:₀)
+17. op: 0000011(3), funct3: 101, funct7: -, 类型: I, 指令: lhu rd, imm(rs1), 描述: load half unsigned, 操作: rd = ZeroExt([Address]₁₅:₀)
+18. op: 0010011(19), funct3: 000, funct7: -, 类型: I, 指令: addi rd, rs1, imm, 描述: add immediate, 操作: rd = rs1 + SignExt(imm)
+19. op: 0010011(19), funct3: 001, funct7: 0000000①, 类型: I, 指令: slli rd, rs1, uimm, 描述: shift left logical immediate, 操作: rd = rs1 << uimm
+20. op: 0010011(19), funct3: 010, funct7: -, 类型: I, 指令: slti rd, rs1, imm, 描述: set less than immediate, 操作: rd = (rs1 < SignExt(imm))
+21. op: 0010011(19), funct3: 011, funct7: -, 类型: I, 指令: sltiu rd, rs1, imm, 描述: set less than imm. unsigned, 操作: rd = (rs1 < SignExt(imm))
+22. op: 0010011(19), funct3: 100, funct7: -, 类型: I, 指令: xori rd, rs1, imm, 描述: xor immediate, 操作: rd = rs1 ^ SignExt(imm)
+23. op: 0010011(19), funct3: 101, funct7: 0000000①, 类型: I, 指令: srli rd, rs1, uimm, 描述: shift right logical immediate, 操作: rd = rs1 >> uimm
+24. op: 0010011(19), funct3: 101, funct7: 0100000①, 类型: I, 指令: srai rd, rs1, uimm, 描述: shift right arithmetic imm., 操作: rd = rs1 >>> uimm
+25. op: 0010011(19), funct3: 110, funct7: -, 类型: I, 指令: ori rd, rs1, imm, 描述: or immediate, 操作: rd = rs1 | SignExt(imm)
+26. op: 0010011(19), funct3: 111, funct7: -, 类型: I, 指令: andi rd, rs1, imm, 描述: and immediate, 操作: rd = rs1 & SignExt(imm)
+27. op: 0010111(23), funct3: -, funct7: -, 类型: U, 指令: auipc rd, upimm, 描述: add upper immediate to PC, 操作: rd = {upimm,12'b0} + PC
+28. op: 0100011(35), funct3: 000, funct7: -, 类型: S, 指令: sb rs2, imm(rs1), 描述: store byte, 操作: [Address]₇:₀ = rs2₇:₀
+29. op: 0100011(35), funct3: 001, funct7: -, 类型: S, 指令: sh rs2, imm(rs1), 描述: store half, 操作: [Address]₁₅:₀ = rs2₁₅:₀
+30. op: 0100011(35), funct3: 010, funct7: -, 类型: S, 指令: sw rs2, imm(rs1), 描述: store word, 操作: [Address]₃₁:₀ = rs2
+31. op: 0110011(51), funct3: 000, funct7: 0000000, 类型: R, 指令: add rd, rs1, rs2, 描述: add, 操作: rd = rs1 + rs2
+32. op: 0110011(51), funct3: 000, funct7: 0100000, 类型: R, 指令: sub rd, rs1, rs2, 描述: sub, 操作: rd = rs1 - rs2
+ 
+注：编码在立即数字段的高7位 Instr₃₁:₂₅ 
+ 
+ 
+33. op: 0110011(51), funct3: 001, funct7: 0000000, 类型: R, 指令: sll rd, rs1, rs2, 描述: shift left logical, 操作: rd = rs1 << rs2₄:₀
+34. op: 0110011(51), funct3: 010, funct7: 0000000, 类型: R, 指令: slt rd, rs1, rs2, 描述: set less than, 操作: rd = (rs1 < rs2)
+35. op: 0110011(51), funct3: 011, funct7: 0000000, 类型: R, 指令: sltu rd, rs1, rs2, 描述: set less than unsigned, 操作: rd = (rs1 < rs2)
+36. op: 0110011(51), funct3: 100, funct7: 0000000, 类型: R, 指令: xor rd, rs1, rs2, 描述: xor, 操作: rd = rs1 ^ rs2
+37. op: 0110011(51), funct3: 101, funct7: 0000000, 类型: R, 指令: srl rd, rs1, rs2, 描述: shift right logical, 操作: rd = rs1 >> rs2₄:₀
+38. op: 0110011(51), funct3: 101, funct7: 0100000, 类型: R, 指令: sra rd, rs1, rs2, 描述: shift right arithmetic, 操作: rd = rs1 >>> rs2₄:₀
+39. op: 0110011(51), funct3: 110, funct7: 0000000, 类型: R, 指令: or rd, rs1, rs2, 描述: or, 操作: rd = rs1 | rs2
+40. op: 0110011(51), funct3: 111, funct7: 0000000, 类型: R, 指令: and rd, rs1, rs2, 描述: and, 操作: rd = rs1 & rs2
+41. op: 0110111(55), funct3: -, funct7: -, 类型: U, 指令: lui rd, upimm, 描述: load upper immediate, 操作: rd = {upimm,12'b0}
+42. op: 1100011(99), funct3: 000, funct7: -, 类型: B, 指令: beq rs1, rs2, label, 描述: branch if=, 操作: if (rs1 == rs2) PC = BTA
+43. op: 1100011(99), funct3: 001, funct7: -, 类型: B, 指令: bne rs1, rs2, label, 描述: branch if≠, 操作: if (rs1 ≠ rs2) PC= BTA
+44. op: 1100011(99), funct3: 100, funct7: -, 类型: B, 指令: blt rs1, rs2, label, 描述: branch if<, 操作: if (rs1 < rs2) PC =BTA
+45. op: 1100011(99), funct3: 101, funct7: -, 类型: B, 指令: bge rs1, rs2, label, 描述: branch if≥, 操作: if (rs1 ≥ rs2) PC = BTA
+46. op: 1100011(99), funct3: 110, funct7: -, 类型: B, 指令: bltu rs1, rs2, label, 描述: branch if< unsigned, 操作: if (rs1 < rs2) PC = BTA
+47. op: 1100011(99), funct3: 111, funct7: -, 类型: B, 指令: bgeu rs1, rs2, label, 描述: branch if≥ unsigned, 操作: if (rs1 ≥ rs2) PC = BTA
+48. op: 1100111(103), funct3: 000, funct7: -, 类型: I, 指令: jalr rd, rs1, imm, 描述: jump and link register, 操作: PC =rs1+SignExt(imm), rd = PC+4
+49. op: 1101111(111), funct3: -, funct7: -, 类型: J, 指令: jal rd, label, 描述: jump and link, 操作: PC =JTA, rd = PC+4
+ 
+ 
+ 
+ 
+注：在RV64I指令集中，寄存器是64位的，但指令仍然是32位。术语“字”通常指32位值。64位的立即数移位指令用到6位立即数uimm₅:₀（6位无符号数）；但对于32位移位指令，移位量的最高位（uimm₅）必须是0值。带w（代表“字”）的指令对64位寄存器的低32位实施运算，并通过符号或零扩展产生64位结果。
+
+一、RISC-V 32位指令格式
+ 
+类型 指令格式（位段划分：31:25, 24:20, 19:15, 14:12, 11:7, 6:0） 
+R-type  funct7(31:25)   rs2(24:20)   rs1(19:15)   funct3(14:12)   rd(11:7)   op(6:0)  
+I-type  imm₁₁:₀(31:20)   rs1(19:15)   funct3(14:12)   rd(11:7)   op(6:0)  
+S-type  imm₁₁:₅(31:25)   rs2(24:20)   rs1(19:15)   funct3(14:12)   imm₄:₀(11:7)   op(6:0)  
+B-type  imm₁₂,₁₀:₅(31:25)   rs2(24:20)   rs1(19:15)   funct3(14:12)   imm₄:₁,₁₁(11:7)   op(6:0)  
+U-type  imm₃₁:₁₂(31:12)   rd(11:7)   op(6:0)  
+J-type  imm₂₀,₁₀:₁,₁₁,₁₉:₁₂(31:12)   rd(11:7)   op(6:0)  
+R4-type  fs3(31:27)   funct2(26:25)   fs2(24:20)   fs1(19:15)   funct3(14:12)   fd(11:7)   op(6:0)  
+ 
+（注：各字段长度： funct7 / imm 高位段7位， rs2 / rs1 / rd / imm 低位段5位， funct3 3位， op 7位；R4-type额外含 fs3 5位、 funct2 2位）
+ 
+ 
+ 
+二、术语定义
+ 
+术语 含义 
+ imm   imm₁₁:₀ 中的带符号立即数 
+ uimm   imm₄:₀ 中的5位无符号立即数 
+ upimm  32位立即数的高20位，位于 imm₃₁:₁₂  
+ Address  内存地址： rs1 + SignExt(imm₁₁:₀)  
+ [Address]  内存地址 Address 处的数据 
+ BTA  分支目标地址： PC + SignExt({imm₁₂:₁, 1'b0})  
+ JTA  跳转目标地址： PC + SignExt({imm₂₀:₁, 1'b0})  
+ label  表示指令地址的文本标签 
+ SignExt  符号扩展至32位 
+ ZeroExt  零扩展至32位 
+ csr  控制与状态寄存器

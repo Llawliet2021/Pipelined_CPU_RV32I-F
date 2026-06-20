@@ -1,0 +1,61 @@
+表B.3 RVF/D: RISC-V单/双精度浮点指令
+ 
+通用浮点R4型指令
+ 
+1. op=1000011(67)，funct3=rm，funct7=fs3,fmt，rs2无，类型R4，指令fmadd fd,fs1,fs2,fs3，描述multiply-add，操作fd = fs1 * fs2 + fs3
+2. op=1000111(71)，funct3=rm，funct7=fs3,fmt，rs2无，类型R4，指令fmsub fd,fs1,fs2,fs3，描述multiply-subtract，操作fd = fs1 * fs2 - fs3
+3. op=1001011(75)，funct3=rm，funct7=fs3,fmt，rs2无，类型R4，指令fnmsub fd,fs1,fs2,fs3，描述negate multiply-add，操作fd = -(fs1 * fs2 + fs3)
+4. op=1001111(79)，funct3=rm，funct7=fs3,fmt，rs2无，类型R4，指令fnmadd fd,fs1,fs2,fs3，描述negate multiply-subtract，操作fd = -(fs1 * fs2 - fs3)
+ 
+通用浮点R型运算/比较/分类指令（op=1010011(83)）
+ 
+5. op=1010011(83)，funct3=rm，funct7=00000,fmt，rs2无，类型R，指令fadd fd,fs1,fs2，描述add，操作fd = fs1 + fs2
+6. op=1010011(83)，funct3=rm，funct7=00001,fmt，rs2无，类型R，指令fsub fd,fs1,fs2，描述subtract，操作fd = fs1 - fs2
+7. op=1010011(83)，funct3=rm，funct7=00010,fmt，rs2无，类型R，指令fmul fd,fs1,fs2，描述multiply，操作fd = fs1 * fs2
+8. op=1010011(83)，funct3=rm，funct7=00011,fmt，rs2无，类型R，指令fdiv fd,fs1,fs2，描述divide，操作fd = fs1 / fs2
+9. op=1010011(83)，funct3=rm，funct7=01011,fmt，rs2=00000，类型R，指令fsqrt fd,fs1，描述square root，操作fd = sqrt(fs1)
+10. op=1010011(83)，funct3=000，funct7=00100,fmt，rs2无，类型R，指令fsgnj fd,fs1,fs2，描述sign injection，操作fd = fs1, sign = sign(fs2)
+11. op=1010011(83)，funct3=001，funct7=00100,fmt，rs2无，类型R，指令fsgnjn fd,fs1,fs2，描述negate sign injection，操作fd = fs1, sign = -sign(fs2)
+12. op=1010011(83)，funct3=010，funct7=00100,fmt，rs2无，类型R，指令fsgnjx fd,fs1,fs2，描述xor sign injection，操作fd = fs1, sign = sign(fs2)^sign(fs1)
+13. op=1010011(83)，funct3=000，funct7=00101,fmt，rs2无，类型R，指令fmin fd,fs1,fs2，描述min，操作fd = min(fs1,fs2)
+14. op=1010011(83)，funct3=001，funct7=00101,fmt，rs2无，类型R，指令fmax fd,fs1,fs2，描述max，操作fd = max(fs1,fs2)
+15. op=1010011(83)，funct3=010，funct7=10100,fmt，rs2无，类型R，指令feq rd,fs1,fs2，描述compare =，操作rd = (fs1 == fs2)
+16. op=1010011(83)，funct3=001，funct7=10100,fmt，rs2无，类型R，指令flt rd,fs1,fs2，描述compare <，操作rd = (fs1 < fs2)
+17. op=1010011(83)，funct3=000，funct7=10100,fmt，rs2无，类型R，指令fle rd,fs1,fs2，描述compare ≤，操作rd = (fs1 ≤ fs2)
+18. op=1010011(83)，funct3=001，funct7=11100,fmt，rs2=00000，类型R，指令fclass rd,fs1，描述classify，操作rd = classification of fs1
+ 
+仅RVF（单精度浮点）指令
+ 
+访存指令
+ 
+19. op=0000111(7)，funct3=010，funct7无，rs2无，类型I，指令flw fd, imm(rs1)，描述load float，操作fd = [Address]₃₁:₀
+20. op=0100111(39)，funct3=010，funct7无，rs2无，类型S，指令fsw fs2,imm(rs1)，描述store float，操作[Address]₃₁:₀ = fd
+ 
+转换/传送R型指令（op=1010011(83)）
+ 
+21. op=1010011(83)，funct3=rm，funct7=1100000，rs2=00000，类型R，指令fcvt.w.s rd, fs1，描述convert to integer，操作rd = integer(fs1)
+22. op=1010011(83)，funct3=rm，funct7=1100000，rs2=00001，类型R，指令fcvt.wu.s rd, fs1，描述convert to unsigned integer，操作rd = unsigned(fs1)
+23. op=1010011(83)，funct3=rm，funct7=1101000，rs2=00000，类型R，指令fcvt.s.w fd, rs1，描述convert int to float，操作fd = float(rs1)
+24. op=1010011(83)，funct3=rm，funct7=1101000，rs2=00001，类型R，指令fcvt.s.wu fd, rs1，描述convert unsigned to float，操作fd = float(rs1)
+25. op=1010011(83)，funct3=000，funct7=1110000，rs2=00000，类型R，指令fmv.x.w rd, fs1，描述move to integer register，操作rd = fs1
+26. op=1010011(83)，funct3=000，funct7=1111000，rs2=00000，类型R，指令fmv.w.x fd, rs1，描述move to f.p. register，操作fd = rs1
+ 
+仅RVD（双精度浮点）指令
+ 
+访存指令
+ 
+27. op=0000111(7)，funct3=011，funct7无，rs2无，类型I，指令fld fd, imm(rs1)，描述load double，操作fd = [Address]₆₃:₀
+28. op=0100111(39)，funct3=011，funct7无，rs2无，类型S，指令fsd fs2,imm(rs1)，描述store double，操作[Address]₆₃:₀ = fd
+ 
+转换R型指令（op=1010011(83)）
+ 
+29. op=1010011(83)，funct3=rm，funct7=1100001，rs2=00000，类型R，指令fcvt.w.d rd, fs1，描述convert to integer，操作rd = integer(fs1)
+30. op=1010011(83)，funct3=rm，funct7=1100001，rs2=00001，类型R，指令fcvt.wu.d rd, fs1，描述convert to unsigned integer，操作rd = unsigned(fs1)
+31. op=1010011(83)，funct3=rm，funct7=1101001，rs2=00000，类型R，指令fcvt.d.w fd, rs1，描述convert int to double，操作fd = double(rs1)
+32. op=1010011(83)，funct3=rm，funct7=1101001，rs2=00001，类型R，指令fcvt.d.wu fd, rs1，描述convert unsigned to double，操作fd = double(rs1)
+33. op=1010011(83)，funct3=rm，funct7=0100000，rs2=00001，类型R，指令fcvt.s.d fd, fs1，描述convert double to float，操作fd = float(fs1)
+34. op=1010011(83)，funct3=rm，funct7=0100001，rs2=00000，类型R，指令fcvt.d.s fd, fs1，描述convert float to double，操作fd = double(fs1)
+ 
+注释文本
+ 
+注：fs1、fs2、fs3、fd：浮点寄存器。fs1、fs2和fd寄存器编码在rs1、rs2和rd字段。只有R4-type指令也编码fs3、fmt。运算指令精度（single=00₂、double=01₂、quad=11₂）。rm：舍入模式（0=就近舍入、1=朝0舍入、2=朝下舍入、3=朝上舍入、4=朝最近（最大量级）舍入、7=动态舍入）。sign(fs1)：fs1的符号。

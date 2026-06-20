@@ -1,0 +1,80 @@
+# RV32F floating-point test (v2: lui+addi constants)
+# 27 stores expected
+
+3F8002B7  # lui x5,0x3f800
+00028293  # addi x5,x5,0x0
+0C502423  # sw t0,200  # store 1.0 to dm[200]
+40400337  # lui x6,0x40400
+00030313  # addi x6,x6,0x0
+0C602623  # sw t1,204  # store 3.0 to dm[204]
+40C003B7  # lui x7,0x40c00
+00038393  # addi x7,x7,0x0
+0C702823  # sw t2,208  # store 6.0 to dm[208]
+C0A002B7  # lui x5,0xc0a00
+00028293  # addi x5,x5,0x0
+0C502A23  # sw t0,212  # store -5.0 to dm[212]
+40000337  # lui x6,0x40000
+00030313  # addi x6,x6,0x0
+0C602C23  # sw t1,216  # store 2.0 to dm[216]
+0C802087  # flw f1,200(x0)  # f1=1.0
+['F', 'F', 'F', 'F', 'F', 'F', 'F', '\n', '0', '0', '0', '0', '0', '0', '0', '0']  # [skip load]
+0CC02107  # flw f2,204(x0)  # f2=3.0
+0D002187  # flw f3,208(x0)  # f3=6.0
+0D402207  # flw f4,212(x0)  # f4=-5.0
+0D802287  # flw f5,216(x0)  # f5=2.0
+00208353  # fadd f6,f1,f2 ->4.0
+0C602E27  # fsw f6,220
+081103D3  # fsub f7,f2,f1 ->2.0
+0E702027  # fsw f7,224
+10310453  # fmul f8,f2,f3 ->18.0
+0E802227  # fsw f8,228
+182184D3  # fdiv f9,f3,f2 ->2.0
+0E902427  # fsw f9,232
+58030553  # fsqrt f10,f6 ->2.0
+0EA02627  # fsw f10,236
+204085D3  # fsgnj f11,f1,f4 ->-1.0
+0EB02827  # fsw f11,240
+20409653  # fsgnjn f12,f1,f4 ->+1.0
+0EC02A27  # fsw f12,244
+2040A6D3  # fsgnjx f13,f1,f4 ->-1.0
+0ED02C27  # fsw f13,248
+28208753  # fmin f14,f1,f2 ->1.0
+0EE02E27  # fsw f14,252
+284097D3  # fmax f15,f1,f4 ->1.0
+10F02027  # fsw f15,256
+A010A553  # feq x10,f1,f1 ->1
+10A02223  # sw x10,260
+A02095D3  # flt x11,f1,f2 ->1
+10B02423  # sw x11,264
+A0208653  # fle x12,f1,f2 ->1
+10C02623  # sw x12,268
+C00306D3  # fcvt.w.s x13,f6 ->4
+10D02823  # sw x13,272
+C0110753  # fcvt.wu.s x14,f2 ->3
+10E02A23  # sw x14,276
+000002B7  # lui x5,0x0
+00728293  # addi x5,x5,0x7
+D0028853  # fcvt.s.w f16,t0 ->7.0
+11002C27  # fsw f16,280
+412002B7  # lui x5,0x41200
+00028293  # addi x5,x5,0x0
+F00288D3  # fmv.w.x f17,t0 ->10.0
+11102E27  # fsw f17,284
+E00887D3  # fmv.x.w x15,f17
+12F02023  # sw x15,288
+18208943  # fmadd f18,f1,f2,f3 ->1*3+6=9
+13202227  # fsw f18,292
+082189C7  # fmsub f19,f3,f2,f1 ->6*3-1=17
+13302427  # fsw f19,296
+20518A4B  # fnmsub f20,f3,f5,f4 ->-(6*2+(-5))=-7
+13402627  # fsw f20,300
+0C802087  # flw f1,200 # 1.0
+0CC02107  # flw f2,204 # 3.0
+00000013  # nop (stall gap for flw->fadd)
+00000013  # nop
+00208AD3  # fadd f21,f1,f2 ->4.0
+13502827  # fsw f21,304 FINAL
+00000013  # nop
+00000013  # nop
+00000013  # nop
+00000013  # beq x0,x0,0

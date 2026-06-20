@@ -1,0 +1,11 @@
+*.vcd
+*.log
+*.dump
+waveform/
+sim_build/
+
+Thumbs.db
+.DS_Store
+
+.vscode/
+.idea/
