@@ -1,4 +1,4 @@
-# 5级流水线 RISC-V CPU 实现RV32I/F
+# 5级流水线 CPU 实现 RV32I/F
 
 
 ---
@@ -7,27 +7,27 @@
 
 ```
 pipelined_cpu/
-├── 📄 top.v                   顶层模块 (CPU核心 + 指令存储器 + 数据存储器)
-├── 📄 datapath.v              数据通路 (5级流水线 + 冲突处理 + 浮点寄存器/FPU)
-├── 📄 controller.v            控制单元 (主译码 + ALU译码 + FPU译码)
-├── 📄 basic.v                 基础模块 (ALU、寄存器堆、立即数扩展、加法器)
-├── 📄 muxes.v                 多路选择器 (2选1、3选1、4选1)
-├── 📄 flopr.v                 触发器 (基本型、带使能、带清零)
-├── 📄 fpu.v                   IEEE 754 单精度浮点运算单元
-├── 📄 fregfile.v              浮点寄存器堆 (32×32bit, 3读1写)
+├── top.v                   顶层模块 (CPU核心 + 指令存储器 + 数据存储器)
+├── datapath.v              数据通路 (5级流水线 + 冲突处理 + 浮点寄存器/FPU)
+├── controller.v            控制单元 (主译码 + ALU译码 + FPU译码)
+├── basic.v                 基础模块 (ALU、寄存器堆、立即数扩展、加法器)
+├── muxes.v                 多路选择器 (2选1、3选1、4选1)
+├── flopr.v                 触发器 (基本型、带使能、带清零)
+├── fpu.v                   IEEE 754 单精度浮点运算单元
+├── fregfile.v              浮点寄存器堆 (32×32bit, 3读1写)
 │
-├── 📄 pipelined_cpu_tb.v      TEST1 测试平台 (基础测试，硬编码校验)
-├── 📄 tb_fulltest.v           TEST2 测试平台 (RV32I 综合测试，读文件比对)
-├── 📄 tb_fptest.v             TEST3 测试平台 (RV32F 浮点测试，读文件比对)
-├── 📄 tb_runner.v             通用测试平台 (可改参数运行任意测试)
+├── pipelined_cpu_tb.v      TEST1 测试平台 (基础测试，硬编码校验)
+├── tb_fulltest.v           TEST2 测试平台 (RV32I 综合测试，读文件比对)
+├── tb_fptest.v             TEST3 测试平台 (RV32F 浮点测试，读文件比对)
+├── tb_runner.v             通用测试平台 (可改参数运行任意测试)
 │
-├── 📄 gen_fulltest.py         生成 RV32I 综合测试文件
-├── 📄 gen_fpu_test.py         生成 RV32F 浮点测试文件
+├── gen_fulltest.py         生成 RV32I 综合测试文件
+├── gen_fpu_test.py         生成 RV32F 浮点测试文件
 │
-├── 📄 README.md               
-├── 📄 TEST1_REPORT.md         测试1 报告 (基础指令，逐周期解释)
-├── 📄 TEST2_REPORT.md         测试2 报告 (全指令，逐条解释)
-├── 📄 TEST3_REPORT.md         测试3 报告 (浮点指令)
+├── README.md               
+├── TEST1_REPORT.md         测试1 报告 (基础指令，逐周期解释)
+├── TEST2_REPORT.md         测试2 报告 (全指令，逐条解释)
+├── TEST3_REPORT.md         测试3 报告 (浮点指令)
 ```
 
 ---
