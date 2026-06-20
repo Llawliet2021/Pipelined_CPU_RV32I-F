@@ -117,9 +117,9 @@ vvp sim3
 
 ## 各测试结果分析
 
-- **[TEST1_REPORT.md](TEST1_REPORT.md)** 
-- **[TEST2_REPORT.md](TEST2_REPORT.md)** 
-- **[TEST3_REPORT.md](TEST3_REPORT.md)**
+- **[TEST1_REPORT.md](pipelined_cpu/TEST1_REPORT.md)** 
+- **[TEST2_REPORT.md](pipelined_cpu/TEST2_REPORT.md)** 
+- **[TEST3_REPORT.md](pipelined_cpu/TEST3_REPORT.md)**
 ---
 
 ## 查看波形
